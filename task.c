@@ -10,7 +10,7 @@ int main(int argc, char *argv[]) {
     (void)argc;
     int status;
     char *del = " \n\t";
-    char **array = NULL; // Use a pointer to a pointer to dynamically allocate memory
+    char **array = NULL; 
     char *element;
     char *buffer = NULL;
     size_t n_c = 0;
@@ -31,7 +31,6 @@ int main(int argc, char *argv[]) {
         element = strtok(buffer, del);
         i = 0;
 
-        // Dynamically allocate memory for the array
         while (element) {
             array = realloc(array, (i + 1) * sizeof(char *));
             array[i] = element;
@@ -39,12 +38,11 @@ int main(int argc, char *argv[]) {
             i++;
         }
         array = realloc(array, (i + 1) * sizeof(char *));
-        array[i] = NULL; // Null-terminate the array
+        array[i] = NULL;
 
         pid = fork();
 
         if (pid == 0) {
-            // Child process
             execve(array[0], array, NULL);
 
             perror(execName);
@@ -52,12 +50,10 @@ int main(int argc, char *argv[]) {
         } else if (pid < 0) {
             perror("fork");
         } else {
-            // Parent process
             wait(&status);
         }
     }
 
-    // Free the dynamically allocated memory before exiting
     for (i = 0; array[i] != NULL; i++) {
         free(array[i]);
     }
