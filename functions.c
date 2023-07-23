@@ -1,9 +1,4 @@
-#include <stdio.h>
-#include <string.h>
-#include <stdlib.h>
-#include <unistd.h>
-#include <sys/wait.h>
-#include <sys/stat.h>
+#include "header.h"
 
 char *_getenv(const char *name)
 {
@@ -52,4 +47,3 @@ char *_getcommand(char *command)
     }
     return NULL;
 }
-

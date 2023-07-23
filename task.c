@@ -1,10 +1,4 @@
-#include <stdio.h>
-#include <string.h>
-#include <stdlib.h>
-#include <unistd.h>
-#include <sys/wait.h>
-#include <sys/stat.h>
-
+#include "header.h"
 int main(int argc, char *argv[]) {
     char *execName;
     (void)argc;
