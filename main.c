@@ -1,10 +1,11 @@
 #include "header.h"
+
 int main(int argc, char *argv[]) {
     char *execName;
     (void)argc;
     int status;
     char *del = " \n\t";
-    char **array = NULL; 
+    char **array = NULL;
     char *element;
     char *buffer = NULL;
     size_t n_c = 0;
@@ -37,10 +38,18 @@ int main(int argc, char *argv[]) {
         pid = fork();
 
         if (pid == 0) {
-            execve(array[0], array, NULL);
-
-            perror(execName);
-            exit(1);
+		char *commandtoexec = _getcommand(array[0]);
+		if (commandtoexec)
+		{
+            		execve(commandtoexec, array, NULL);
+			
+            		perror(execName);
+            		exit(1);
+		}else
+		{
+			perror(execName);
+                        exit(1);
+		}	
         } else if (pid < 0) {
             perror("fork");
         } else {
